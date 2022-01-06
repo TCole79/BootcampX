@@ -39,3 +39,24 @@ LIMIT 5;
       );
     });
   });
+
+
+/* is the following correct?
+
+const queryString = `
+    SELECT DISTINCT students.id as student_id, students.name as name, cohorts.name as cohort
+    FROM students
+    JOIN cohorts ON cohort_id = cohort.id
+    WHERE cohorts.name = $1
+    ORDER BY students;
+    `;
+const values = [process.argv[2] || "JUL02"];
+pool
+  .query(queryString, values)
+  .then((res) => {
+    res.rows.forEach((row) => {
+      console.log(`${row.cohort}: ${row.teacher}`);
+    });
+  })
+  .catch((err) => console.error("query error", err.stack));
+  */
